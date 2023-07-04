@@ -62,6 +62,20 @@ return require('packer').startup(function(use)
     --nvim-commaround
     use 'gennaro-tedesco/nvim-commaround'
 
+    use {
+        "williamboman/mason.nvim",
+        requires = {
+            { 'neovim/nvim-lspconfig' },
+            { 'williamboman/mason-lspconfig.nvim' },
+            { 'jose-elias-alvarez/null-ls.nvim' },
+        },
+        config = function ()
+            require("mason").setup()
+            require("mason-lspconfig").setup()
+        end,
+    run = ":MasonUpdate" -- :MasonUpdate updates registry contents
+    }
+    --[[
     --lsp-zero
     use {
         'VonHeikemen/lsp-zero.nvim',
@@ -84,7 +98,7 @@ return require('packer').startup(function(use)
             { 'rafamadriz/friendly-snippets' },
         }
     }
-
+    ]]
     --icons for lsp completions
     use 'onsails/lspkind.nvim'
 

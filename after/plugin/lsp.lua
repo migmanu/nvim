@@ -1,4 +1,4 @@
-vim.opt.signcolumn = 'yes' -- Reserve space for diagnostic icons
+--[[vim.opt.signcolumn = 'yes' -- Reserve space for diagnostic icons
 
 local lsp = require('lsp-zero')
 lsp.preset('recommended')
@@ -25,4 +25,4 @@ local cmp = require'cmp'
 
 lsp.nvim_workspace()
 
-lsp.setup()
+lsp.setup()]]

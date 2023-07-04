@@ -1,4 +1,4 @@
-require('lspkind').init({
+--[[require('lspkind').init({
     -- DEPRECATED (use mode instead): enables text annotations
     --
     -- default: true
@@ -46,4 +46,4 @@ require('lspkind').init({
       Operator = "",
       TypeParameter = ""
     },
-})
+})]]
