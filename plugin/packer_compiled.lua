@@ -84,11 +84,6 @@ _G.packer_plugins = {
     path = "/home/migmanu/.local/share/nvim/site/pack/packer/start/harpoon",
     url = "https://github.com/ThePrimeagen/harpoon"
   },
-  ["header42.nvim"] = {
-    loaded = true,
-    path = "/home/migmanu/.local/share/nvim/site/pack/packer/start/header42.nvim",
-    url = "https://github.com/0ur4n05/header42.nvim"
-  },
   ["indent-blankline.nvim"] = {
     loaded = true,
     path = "/home/migmanu/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
