@@ -118,6 +118,12 @@ return require('packer').startup(function(use)
         end
     }
 
+	use { 'gen740/SmoothCursor.nvim',
+		config = function()
+			require('smoothcursor').setup()
+		end
+	}
+
     --lsp-colors
     use 'folke/lsp-colors.nvim'
 
