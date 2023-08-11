@@ -7,6 +7,9 @@ return require('packer').startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
+	-- 42 header
+	use '42Paris/42header'
+
     --telescope
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.0',
