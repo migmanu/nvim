@@ -10,6 +10,9 @@ return require('packer').startup(function(use)
 	-- 42 header
 	use '42Paris/42header'
 
+	-- transparetn nvim
+	use 'xiyaowong/transparent.nvim'
+
     --telescope
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.0',
