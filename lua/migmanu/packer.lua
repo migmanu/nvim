@@ -10,6 +10,9 @@ return require('packer').startup(function(use)
 	-- 42 header
 	use '42Paris/42header'
 
+	-- 42 norminette
+	use 'hardyrafael17/norminette42.nvim'
+
 	-- transparetn nvim
 	use 'xiyaowong/transparent.nvim'
 
