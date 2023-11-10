@@ -13,6 +13,11 @@ return require('packer').startup(function(use)
 	-- 42 norminette
 	use 'hardyrafael17/norminette42.nvim'
 
+	-- nvim-dap
+	use 'mfussenegger/nvim-dap'
+	use 'rcarriga/nvim-dap-ui'
+
+	use 'jay-babu/mason-nvim-dap.nvim'
 	-- transparetn nvim
 	use 'xiyaowong/transparent.nvim'
 
@@ -81,6 +86,7 @@ return require('packer').startup(function(use)
         config = function ()
             require("mason").setup()
             require("mason-lspconfig").setup()
+			require("mason-nvim-dap").setup()
         end,
     run = ":MasonUpdate" -- :MasonUpdate updates registry contents
     }
