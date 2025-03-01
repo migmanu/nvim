@@ -187,6 +187,30 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+-- move in insert mode with Control + h, j, k, l
+vim.api.nvim_set_keymap('i', '<C-h>', '<left>', { noremap = true })
+vim.api.nvim_set_keymap('i', '<C-j>', '<down>', { noremap = true })
+vim.api.nvim_set_keymap('i', '<C-k>', '<up>', { noremap = true })
+vim.api.nvim_set_keymap('i', '<C-l>', '<right>', { noremap = true })
+
+-- move selected test in visual mode
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { noremap = true })
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { noremap = true })
+
+-- Toggle spellcheck in English
+vim.keymap.set('n', '<leader>sp', function()
+  vim.opt_local.spell = not vim.opt_local.spell:get()
+  vim.opt_local.spelllang = 'en_us'
+  print('Spellcheck: ' .. (vim.opt_local.spell:get() and 'ON' or 'OFF') .. ' (Language: English)')
+end, { desc = 'Toggle Spellcheck (English)' })
+
+-- Toggle spellcheck in Spanish
+vim.keymap.set('n', '<leader>sps', function()
+  vim.opt_local.spell = not vim.opt_local.spell:get()
+  vim.opt_local.spelllang = 'es'
+  print('Spellcheck: ' .. (vim.opt_local.spell:get() and 'ON' or 'OFF') .. ' (Language: Spanish)')
+end, { desc = 'Toggle Spellcheck (Spanish)' })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -226,6 +250,46 @@ vim.opt.rtp:prepend(lazypath)
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+
+  -- git plugins
+  'tpope/vim-fugitive',
+  'tpope/vim-rhubarb',
+
+  -- better escape
+  {
+    'max397574/better-escape.nvim',
+    config = function()
+      require('better_escape').setup {
+        timeout = vim.o.timeoutlen,
+        default_mappings = true,
+        mappings = {
+          i = {
+            j = {
+              j = '<Esc>',
+            },
+          },
+          c = {
+            j = {
+              j = '<Esc>',
+            },
+          },
+          t = {
+            j = {
+              j = '<Esc>',
+            },
+          },
+        },
+      }
+    end,
+  },
+
+  -- grug for search and replace
+  {
+    'MagicDuck/grug-far.nvim',
+    config = function()
+      require('grug-far').setup {}
+    end,
+  },
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
@@ -978,7 +1042,7 @@ require('lazy').setup({
   --  Here are some example plugins that I've included in the Kickstart repository.
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
-  -- require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.debug',
   -- require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
   require 'kickstart.plugins.autopairs',
@@ -989,7 +1053,7 @@ require('lazy').setup({
   --    This is the easiest way to modularize your config.
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
   --
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
   -- Or use telescope!
