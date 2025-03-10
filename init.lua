@@ -1002,7 +1002,7 @@ require('lazy').setup({
         -- ...
       }
 
-      vim.cmd 'colorscheme github_dark'
+      vim.cmd 'colorscheme github_light'
     end,
   },
 
