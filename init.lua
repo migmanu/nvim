@@ -133,6 +133,8 @@ vim.schedule(function()
   vim.opt.clipboard = 'unnamedplus'
 end)
 
+vim.opt.conceallevel = 1
+
 -- Enable break indent
 vim.opt.breakindent = true
 
@@ -204,13 +206,7 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
--- move in insert mode with Control + h, j, k, l
-vim.api.nvim_set_keymap('i', '<C-h>', '<left>', { noremap = true })
-vim.api.nvim_set_keymap('i', '<C-j>', '<down>', { noremap = true })
-vim.api.nvim_set_keymap('i', '<C-k>', '<up>', { noremap = true })
-vim.api.nvim_set_keymap('i', '<C-l>', '<right>', { noremap = true })
-
--- move selected test in visual mode
+-- move selected text in visual mode
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { noremap = true })
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { noremap = true })
 
@@ -227,6 +223,9 @@ vim.keymap.set('n', '<leader>sps', function()
   vim.opt_local.spelllang = 'es'
   print('Spellcheck: ' .. (vim.opt_local.spell:get() and 'ON' or 'OFF') .. ' (Language: Spanish)')
 end, { desc = 'Toggle Spellcheck (Spanish)' })
+
+-- fuck it all
+vim.keymap.set('n', '<leader>fml', '<cmd>CellularAutomaton make_it_rain<CR>')
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -267,9 +266,42 @@ vim.opt.rtp:prepend(lazypath)
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
 
+  -- why not?
+  'eandrju/cellular-automaton.nvim',
+
+  -- stay centered
+  {
+    'arnamak/stay-centered.nvim',
+    lazy = false,
+    opts = {
+      skip_filetypes = { 'lua', 'typescript' },
+    },
+  },
+
   -- git plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
+
+  -- markdown preview
+  {
+    'iamcco/markdown-preview.nvim',
+    cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
+    build = 'cd app && npm install',
+    init = function()
+      vim.g.mkdp_filetypes = { 'markdown' }
+    end,
+    ft = { 'markdown' },
+  },
+
+  -- flog for git graphs
+  {
+    'rbong/vim-flog',
+    lazy = true,
+    cmd = { 'Flog', 'Flogsplit', 'Floggit' },
+    dependencies = {
+      'tpope/vim-fugitive',
+    },
+  },
 
   -- better escape
   {
@@ -297,6 +329,14 @@ require('lazy').setup({
         },
       }
     end,
+  },
+
+  -- for doxygen annotations
+  {
+    'danymat/neogen',
+    config = true,
+    -- Uncomment next line if you want to follow only stable versions
+    -- version = "*"
   },
 
   -- codecompanion ai
@@ -1082,7 +1122,7 @@ require('lazy').setup({
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
   require 'kickstart.plugins.debug',
-  -- require 'kickstart.plugins.indent_line',
+  require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
   require 'kickstart.plugins.autopairs',
   require 'kickstart.plugins.neo-tree',
