@@ -303,6 +303,16 @@ require('lazy').setup({
     },
   },
 
+  -- zen mode
+  {
+    'folke/zen-mode.nvim',
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    },
+  },
+
   -- better escape
   {
     'max397574/better-escape.nvim',
