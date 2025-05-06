@@ -210,6 +210,13 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { noremap = true })
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { noremap = true })
 
+-- toggle lsp warnings
+vim.keymap.set('n', '<leader>dv', function()
+  local current = vim.diagnostic.config().virtual_text
+  vim.diagnostic.config { virtual_text = not current }
+  print('Diagnostics virtual text: ' .. (not current and 'ON' or 'OFF'))
+end, { desc = 'Toggle Diagnostics Virtual Text' })
+
 -- Toggle spellcheck in English
 vim.keymap.set('n', '<leader>sp', function()
   vim.opt_local.spell = not vim.opt_local.spell:get()
