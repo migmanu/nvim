@@ -276,6 +276,12 @@ require('lazy').setup({
   -- why not?
   'eandrju/cellular-automaton.nvim',
 
+  -- leap
+  { 'ggandor/leap.nvim' },
+
+  -- vim-repeat
+  { 'tpope/vim-repeat', event = 'VeryLazy' },
+
   -- stay centered
   {
     'arnamak/stay-centered.nvim',
