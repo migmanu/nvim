@@ -290,6 +290,9 @@ require('lazy').setup({
   -- leap
   { 'ggandor/leap.nvim' },
 
+  -- molten for notebooks
+  { 'benlubas/molten-nvim' },
+
   -- vim-repeat
   { 'tpope/vim-repeat', event = 'VeryLazy' },
 
