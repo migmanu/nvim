@@ -290,9 +290,6 @@ require('lazy').setup({
   -- leap
   { 'ggandor/leap.nvim' },
 
-  -- molten for notebooks
-  { 'benlubas/molten-nvim' },
-
   -- vim-repeat
   { 'tpope/vim-repeat', event = 'VeryLazy' },
 
@@ -376,15 +373,15 @@ require('lazy').setup({
     -- version = "*"
   },
 
-  -- codecompanion ai
-  {
-    'olimorris/codecompanion.nvim',
-    config = true,
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-treesitter/nvim-treesitter',
-    },
-  },
+  -- -- codecompanion ai
+  -- {
+  --   'olimorris/codecompanion.nvim',
+  --   config = true,
+  --   dependencies = {
+  --     'nvim-lua/plenary.nvim',
+  --     'nvim-treesitter/nvim-treesitter',
+  --   },
+  -- },
 
   -- grug for search and replace
   {
