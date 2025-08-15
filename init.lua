@@ -276,22 +276,8 @@ require('lazy').setup({
   -- why not?
   'eandrju/cellular-automaton.nvim',
 
-  -- refactor
-  {
-    'ThePrimeagen/refactoring.nvim',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-treesitter/nvim-treesitter',
-    },
-    lazy = false,
-    opts = {},
-  },
-
   -- leap
   { 'ggandor/leap.nvim' },
-
-  -- vim-repeat
-  { 'tpope/vim-repeat', event = 'VeryLazy' },
 
   -- stay centered
   {
@@ -315,26 +301,6 @@ require('lazy').setup({
       vim.g.mkdp_filetypes = { 'markdown' }
     end,
     ft = { 'markdown' },
-  },
-
-  -- flog for git graphs
-  {
-    'rbong/vim-flog',
-    lazy = true,
-    cmd = { 'Flog', 'Flogsplit', 'Floggit' },
-    dependencies = {
-      'tpope/vim-fugitive',
-    },
-  },
-
-  -- zen mode
-  {
-    'folke/zen-mode.nvim',
-    opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
-    },
   },
 
   -- better escape
@@ -365,23 +331,15 @@ require('lazy').setup({
     end,
   },
 
-  -- for doxygen annotations
+  -- codecompanion ai
   {
-    'danymat/neogen',
+    'olimorris/codecompanion.nvim',
     config = true,
-    -- Uncomment next line if you want to follow only stable versions
-    -- version = "*"
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-treesitter/nvim-treesitter',
+    },
   },
-
-  -- -- codecompanion ai
-  -- {
-  --   'olimorris/codecompanion.nvim',
-  --   config = true,
-  --   dependencies = {
-  --     'nvim-lua/plenary.nvim',
-  --     'nvim-treesitter/nvim-treesitter',
-  --   },
-  -- },
 
   -- grug for search and replace
   {
