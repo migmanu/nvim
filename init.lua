@@ -295,7 +295,7 @@ require('lazy').setup({
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
 
-  -- markdown preview
+  -- markdown preview:
   {
     'iamcco/markdown-preview.nvim',
     cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
@@ -333,6 +333,9 @@ require('lazy').setup({
       }
     end,
   },
+
+  -- copilot
+  { 'github/copilot.vim' },
 
   -- codecompanion ai
   {
