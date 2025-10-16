@@ -15,10 +15,6 @@ return {
         name = 'personal',
         path = '~/Documents/PKM',
       },
-      {
-        name = 'tomtom',
-        path = '~/Documents/vault',
-      },
     },
   },
 }
