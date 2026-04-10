@@ -280,7 +280,7 @@ require('lazy').setup({
   'eandrju/cellular-automaton.nvim',
 
   -- leap
-  { 'ggandor/leap.nvim' },
+  { 'https://codeberg.org/andyg/leap.nvim' },
 
   -- stay centered
   {
