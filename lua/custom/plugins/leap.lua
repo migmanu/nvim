@@ -1,5 +1,5 @@
 return {
-  'https://codeberg.org/andyg/leap.nvim',
+  url = 'https://codeberg.org/andyg/leap.nvim',
   enabled = true,
   keys = {
     { 's', mode = { 'n', 'x', 'o' }, desc = 'Leap Forward to' },
@@ -11,8 +11,12 @@ return {
     for k, v in pairs(opts) do
       leap.opts[k] = v
     end
-    leap.add_default_mappings(true)
-    vim.keymap.del({ 'x', 'o' }, 'x')
-    vim.keymap.del({ 'x', 'o' }, 'X')
+    -- Set keymaps manually to override default 's' behavior
+    vim.keymap.set({ 'n', 'x', 'o' }, 's', function()
+      leap.leap { target_windows = { vim.api.nvim_get_current_win() } }
+    end, { desc = 'Leap Forward to' })
+    vim.keymap.set({ 'n', 'x', 'o' }, '<leader>sb', function()
+      leap.leap { backward = true, target_windows = { vim.api.nvim_get_current_win() } }
+    end, { desc = 'Leap Backward to' })
   end,
 }
