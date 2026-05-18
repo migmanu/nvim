@@ -18,6 +18,9 @@ return {
     scope = { enabled = true },
     scroll = { enabled = false },
     statuscolumn = { enabled = true },
+    terminal = {
+      shell = "zsh",
+    },
     words = { enabled = true },
     styles = {
       notification = {
