@@ -1,7 +1,7 @@
 -- Inherit full login-shell PATH so git hooks (e.g. pre-commit) can find their tools
 -- when lazygit is launched from inside Neovim.
-if vim.fn.has('unix') == 1 then
-  local shell_path = vim.fn.system('zsh -l -c "echo -n $PATH" 2>/dev/null')
+if vim.fn.has 'unix' == 1 then
+  local shell_path = vim.fn.system 'zsh -l -c "echo -n $PATH" 2>/dev/null'
   if vim.v.shell_error == 0 and shell_path ~= '' then
     vim.env.PATH = shell_path
   end
@@ -195,6 +195,8 @@ vim.opt.rtp:prepend(lazypath)
 --
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
+
+  -- INSTALLED PLUGINS
 
   -- cpp highlight
   'bfrg/vim-c-cpp-modern',
