@@ -1,3 +1,12 @@
+-- Inherit full login-shell PATH so git hooks (e.g. pre-commit) can find their tools
+-- when lazygit is launched from inside Neovim.
+if vim.fn.has('unix') == 1 then
+  local shell_path = vim.fn.system('zsh -l -c "echo -n $PATH" 2>/dev/null')
+  if vim.v.shell_error == 0 and shell_path ~= '' then
+    vim.env.PATH = shell_path
+  end
+end
+
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
