@@ -171,6 +171,23 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+-- Keep cursor vertically centered (replaces stay-centered.nvim)
+local _stay_centered_skip = { lua = true, typescript = true, terminal = true }
+vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI', 'BufEnter' }, {
+  group = vim.api.nvim_create_augroup('stay-centered', { clear = true }),
+  callback = function()
+    local mode = vim.fn.mode()
+    if mode == 't' or _stay_centered_skip[vim.bo.filetype] or vim.bo.buftype == 'terminal' then
+      return
+    end
+    local line = vim.api.nvim_win_get_cursor(0)[1]
+    if line ~= vim.b.last_line then
+      vim.cmd 'normal! zz'
+      vim.b.last_line = line
+    end
+  end,
+})
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -204,14 +221,6 @@ require('lazy').setup({
   -- why not?
   'eandrju/cellular-automaton.nvim',
 
-  -- stay centered
-  {
-    'arnamak/stay-centered.nvim',
-    lazy = false,
-    opts = {
-      skip_filetypes = { 'lua', 'typescript' },
-    },
-  },
 
   -- git plugins
   'tpope/vim-fugitive',
