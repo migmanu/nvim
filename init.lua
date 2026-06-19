@@ -221,7 +221,6 @@ require('lazy').setup({
   -- why not?
   'eandrju/cellular-automaton.nvim',
 
-
   -- git plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
