@@ -270,14 +270,11 @@ require('lazy').setup({
   -- codecompanion ai
   {
     'olimorris/codecompanion.nvim',
+    version = '^19.0.0',
+    opts = {},
     dependencies = {
       'nvim-lua/plenary.nvim',
-    },
-    opts = {
-      -- NOTE: The log_level is in `opts.opts`
-      opts = {
-        log_level = 'DEBUG', -- or "TRACE"
-      },
+      'nvim-treesitter/nvim-treesitter',
     },
   },
 
