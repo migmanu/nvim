@@ -402,7 +402,8 @@ require('lazy').setup({
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
-    branch = '0.1.x',
+    -- 0.1.x is frozen and calls the old nvim-treesitter API removed on its main branch
+    branch = 'master',
     dependencies = {
       'nvim-lua/plenary.nvim',
       { -- If encountering errors, see telescope-fzf-native README for installation instructions
@@ -453,6 +454,7 @@ require('lazy').setup({
           layout_strategy = 'horizontal',
           layout_config = { width = { padding = 0 }, height = { padding = 0 } },
           wrap_results = true,
+          preview = { treesitter = false }, -- regex :syntax highlighting in previews instead
           -- mappings = {
           --   i = { ['<c-enter>'] = 'to_fuzzy_refine' },
           -- },
