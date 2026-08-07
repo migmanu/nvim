@@ -264,9 +264,6 @@ require('lazy').setup({
     end,
   },
 
-  -- copilot
-  { 'github/copilot.vim' },
-
   -- codecompanion ai
   {
     'olimorris/codecompanion.nvim',
