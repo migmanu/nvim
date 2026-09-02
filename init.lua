@@ -233,7 +233,11 @@ require('lazy').setup({
     -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
     ---@module 'render-markdown'
     ---@type render.md.UserConfig
-    opts = {},
+    opts = {
+      -- Fix bullets/icons rendering right-shifted in some terminals/fonts.
+      -- https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/93
+      bullet = { right_pad = 1 },
+    },
   },
 
   -- better escape

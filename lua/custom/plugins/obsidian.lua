@@ -16,5 +16,9 @@ return {
         path = '~/Documents/PKM',
       },
     },
+    -- Let render-markdown.nvim own the in-buffer rendering; obsidian.nvim's own
+    -- UI fights it (double-rendered/shifted checkboxes and icons).
+    -- https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/93
+    ui = { enable = false },
   },
 }
