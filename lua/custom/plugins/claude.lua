@@ -1,11 +1,17 @@
 return {
   "coder/claudecode.nvim",
   dependencies = { "folke/snacks.nvim" },
+  lazy = false, -- load at startup so the IDE server runs and external Claude sessions can /ide-connect
   opts = {
+    auto_start = true,
     diff_opts = {
       open_in_new_tab = true,
     },
   },
+  config = function(_, opts)
+    require("claudecode").setup(opts)
+    require("custom.claude_show") -- highlight/walk-through helper driven by ~/.local/bin/nvim-show
+  end,
   keys = {
     { "<leader>a", nil, desc = "AI/Claude Code" },
     { "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
