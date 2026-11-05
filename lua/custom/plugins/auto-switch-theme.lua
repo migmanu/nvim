@@ -1,11 +1,11 @@
 return {
   'evelez7/auto-switch-theme.nvim',
   lazy = false,
-  priority = 900, -- load after github-theme (priority 1000) so its colorschemes exist
-  dependencies = { 'github-theme' },
+  priority = 900, -- load after catppuccin (priority 1000) so its colorschemes exist
+  dependencies = { 'catppuccin' },
   opts = {
-    light = 'github_light_high_contrast',
-    dark = 'github_dark_high_contrast',
+    light = 'catppuccin-latte',
+    dark = 'catppuccin', -- default flavour (mocha)
   },
   -- The plugin only switches colorscheme in reaction to `OptionSet background`;
   -- it never applies a theme on startup. Apply one explicitly here so we don't
