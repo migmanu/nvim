@@ -165,14 +165,14 @@ vim.keymap.set('n', '<leader>dv', function()
 end, { desc = 'Toggle Diagnostics Virtual Text' })
 
 -- Toggle spellcheck in English
-vim.keymap.set('n', '<leader>sp', function()
+vim.keymap.set('n', '<leader>ue', function()
   vim.opt_local.spell = not vim.opt_local.spell:get()
   vim.opt_local.spelllang = 'en_us'
   print('Spellcheck: ' .. (vim.opt_local.spell:get() and 'ON' or 'OFF') .. ' (Language: English)')
 end, { desc = 'Toggle Spellcheck (English)' })
 
 -- Toggle spellcheck in Spanish
-vim.keymap.set('n', '<leader>sps', function()
+vim.keymap.set('n', '<leader>uS', function()
   vim.opt_local.spell = not vim.opt_local.spell:get()
   vim.opt_local.spelllang = 'es'
   print('Spellcheck: ' .. (vim.opt_local.spell:get() and 'ON' or 'OFF') .. ' (Language: Spanish)')
