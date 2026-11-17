@@ -2,11 +2,24 @@
 -- when lazygit is launched from inside Neovim. This matters when Neovim is started
 -- outside a terminal shell; from a terminal the inherited PATH already matches.
 -- Fetched asynchronously: a blocking login-shell spawn cost ~150-240ms per startup.
+-- Merge rather than replace: by the time this lands, plugins (mason) have already
+-- prepended their own dirs to PATH, and overwriting it would drop them.
 if vim.fn.has 'unix' == 1 and vim.fn.executable 'zsh' == 1 then
   vim.system({ 'zsh', '-l', '-c', 'echo -n $PATH' }, { text = true }, function(out)
     if out.code == 0 and out.stdout and out.stdout ~= '' then
       vim.schedule(function()
-        vim.env.PATH = out.stdout
+        local dirs = vim.split(vim.env.PATH or '', ':', { trimempty = true })
+        local seen = {}
+        for _, d in ipairs(dirs) do
+          seen[d] = true
+        end
+        for _, d in ipairs(vim.split(out.stdout, ':', { trimempty = true })) do
+          if not seen[d] then
+            seen[d] = true
+            table.insert(dirs, d)
+          end
+        end
+        vim.env.PATH = table.concat(dirs, ':')
       end)
     end
   end)
