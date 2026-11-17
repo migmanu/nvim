@@ -243,6 +243,8 @@ require('lazy').setup({
       -- Fix bullets/icons rendering right-shifted in some terminals/fonts.
       -- https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/93
       bullet = { right_pad = 1 },
+      -- No LaTeX math in notes; skip the latex parser / latex2text dependency.
+      latex = { enabled = false },
     },
   },
 
