@@ -1,10 +1,11 @@
--- debug.lua
+-- debug.lua: debugger (DAP) for Python, plus codelldb for C/C++.
 --
--- Shows how to use the DAP plugin to debug your code.
+--   <leader>b  toggle breakpoint        <F5>  start / continue
+--   <leader>dt debug the test under cursor (pytest)
+--   <F1> step into   <F2> step over   <F3> step out   <F7> toggle debug UI
 --
--- Primarily focused on configuring the debugger for Go, but can
--- be extended to other languages as well. That's why it's called
--- kickstart.nvim and not kitchen-sink.nvim ;)
+-- Python runs with the project's interpreter: an activated venv, else ./.venv
+-- or ./venv in the cwd, else python3 (resolved by nvim-dap-python).
 
 return {
   -- NOTE: Yes, you can install new plugins here!
@@ -21,8 +22,8 @@ return {
     'williamboman/mason.nvim',
     'jay-babu/mason-nvim-dap.nvim',
 
-    -- Add your own debuggers here
-    'leoluz/nvim-dap-go',
+    -- Python: picks the project venv, can debug a single test
+    'mfussenegger/nvim-dap-python',
   },
   keys = {
     -- Basic debugging keymaps, feel free to change to your liking!
@@ -68,6 +69,14 @@ return {
       end,
       desc = 'Debug: Set Breakpoint',
     },
+    {
+      '<leader>dt',
+      function()
+        require('dap-python').test_method()
+      end,
+      ft = 'python',
+      desc = 'Debug: Test under cursor',
+    },
     -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
     {
       '<F7>',
@@ -88,14 +97,19 @@ return {
 
       -- You can provide additional configuration to the handlers,
       -- see mason-nvim-dap README for more information
-      handlers = {},
+      handlers = {
+        function(config)
+          require('mason-nvim-dap').default_setup(config)
+        end,
+        -- nvim-dap-python sets up Python below; skip mason's version of it
+        python = function() end,
+      },
 
       -- You'll need to check that you have the required things installed
       -- online, please don't ask me how to install them :)
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
-        'delve',
-        'python',
+        'python', -- debugpy
         'codelldb',
       },
     }
@@ -138,13 +152,9 @@ return {
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
-    -- Install golang specific config
-    require('dap-go').setup {
-      delve = {
-        -- On Windows delve must be run attached or it crashes.
-        -- See https://github.com/leoluz/nvim-dap-go/blob/main/README.md#configuring
-        detached = vim.fn.has 'win32' == 0,
-      },
-    }
+    -- debugpy itself runs from mason's own venv; the program being debugged
+    -- uses the project interpreter (see header).
+    require('dap-python').setup(vim.fn.stdpath 'data' .. '/mason/packages/debugpy/venv/bin/python')
+    require('dap-python').test_runner = 'pytest'
   end,
 }
