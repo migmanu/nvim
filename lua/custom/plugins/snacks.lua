@@ -194,6 +194,35 @@ return {
       end,
       desc = 'GitHub Pull Requests (all)',
     },
+    -- Kept from the old Telescope maps, so the muscle memory still works
+    {
+      '<leader>sf',
+      function()
+        Snacks.picker.files()
+      end,
+      desc = 'Search Files',
+    },
+    {
+      '<leader>sr',
+      function()
+        Snacks.picker.resume()
+      end,
+      desc = 'Search Resume',
+    },
+    {
+      '<leader>s.',
+      function()
+        Snacks.picker.recent()
+      end,
+      desc = 'Search Recent Files',
+    },
+    {
+      '<leader>sn',
+      function()
+        Snacks.picker.files { cwd = vim.fn.stdpath 'config' }
+      end,
+      desc = 'Search Neovim Config Files',
+    },
     -- Grep
     {
       '<leader>sb',
