@@ -1,11 +1,28 @@
 return {
   'pwntester/octo.nvim',
   cmd = 'Octo',
+  init = function()
+    -- Octo's review placeholder ("octo/null") and diff buffers are regular,
+    -- non-scratch buffers, so they get swap files. When a review is open in
+    -- two nvims, or nvim was killed, every new review then warns that a swap
+    -- file exists. Their content comes from GitHub, so a swap file is useless.
+    vim.api.nvim_create_autocmd('BufFilePost', {
+      group = vim.api.nvim_create_augroup('octo-no-swap', { clear = true }),
+      pattern = { '*/octo/null', 'octo://*/review/*' },
+      callback = function(args)
+        vim.bo[args.buf].swapfile = false
+      end,
+    })
+  end,
   opts = {
     -- or "fzf-lua" or "snacks" or "default"
     picker = 'telescope',
     -- bare Octo command opens picker of commands
     enable_builtin = true,
+    -- In reviews, show the right (PR) side as the real file on disk instead of
+    -- an octo:// scratch buffer, so LSP (gd, K, references) works. Needs the PR
+    -- branch checked out; Octo offers to check it out when the review starts.
+    use_local_fs = true,
   },
   keys = {
     {
