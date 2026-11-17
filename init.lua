@@ -249,17 +249,6 @@ require('lazy').setup({
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
 
-  -- codecompanion ai
-  {
-    'olimorris/codecompanion.nvim',
-    version = '^19.0.0',
-    opts = {},
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-treesitter/nvim-treesitter',
-    },
-  },
-
   -- grug for search and replace
   {
     'MagicDuck/grug-far.nvim',
