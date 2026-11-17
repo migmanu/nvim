@@ -15,8 +15,9 @@ return {
     vim.keymap.set({ 'n', 'x', 'o' }, 's', function()
       leap.leap { target_windows = { vim.api.nvim_get_current_win() } }
     end, { desc = 'Leap Forward to' })
-    vim.keymap.set({ 'n', 'x', 'o' }, '<leader>sb', function()
+    vim.keymap.set({ 'n', 'x', 'o' }, 'S', function()
       leap.leap { backward = true, target_windows = { vim.api.nvim_get_current_win() } }
     end, { desc = 'Leap Backward to' })
+    vim.keymap.set({ 'n', 'x', 'o' }, 'gs', '<Plug>(leap-from-window)', { desc = 'Leap from Windows' })
   end,
 }
