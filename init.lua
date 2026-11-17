@@ -249,34 +249,6 @@ require('lazy').setup({
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
 
-  -- better escape
-  {
-    'max397574/better-escape.nvim',
-    config = function()
-      require('better_escape').setup {
-        timeout = vim.o.timeoutlen,
-        default_mappings = true,
-        mappings = {
-          i = {
-            j = {
-              j = '<Esc>',
-            },
-          },
-          c = {
-            j = {
-              j = '<Esc>',
-            },
-          },
-          t = {
-            j = {
-              j = '<Esc>',
-            },
-          },
-        },
-      }
-    end,
-  },
-
   -- codecompanion ai
   {
     'olimorris/codecompanion.nvim',
