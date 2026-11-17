@@ -1,10 +1,15 @@
 -- Inherit full login-shell PATH so git hooks (e.g. pre-commit) can find their tools
--- when lazygit is launched from inside Neovim.
-if vim.fn.has 'unix' == 1 then
-  local shell_path = vim.fn.system 'zsh -l -c "echo -n $PATH" 2>/dev/null'
-  if vim.v.shell_error == 0 and shell_path ~= '' then
-    vim.env.PATH = shell_path
-  end
+-- when lazygit is launched from inside Neovim. This matters when Neovim is started
+-- outside a terminal shell; from a terminal the inherited PATH already matches.
+-- Fetched asynchronously: a blocking login-shell spawn cost ~150-240ms per startup.
+if vim.fn.has 'unix' == 1 and vim.fn.executable 'zsh' == 1 then
+  vim.system({ 'zsh', '-l', '-c', 'echo -n $PATH' }, { text = true }, function(out)
+    if out.code == 0 and out.stdout and out.stdout ~= '' then
+      vim.schedule(function()
+        vim.env.PATH = out.stdout
+      end)
+    end
+  end)
 end
 
 -- Set <space> as the leader key
