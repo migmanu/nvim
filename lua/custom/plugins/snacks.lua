@@ -7,7 +7,8 @@ return {
     bigfile = { enabled = true },
     dashboard = { enabled = true },
     explorer = { enabled = true },
-    indent = { enabled = true },
+    -- '▎' matches the look indent-blankline had before it was removed.
+    indent = { enabled = true, indent = { char = '▎' } },
     input = { enabled = true },
     notifier = {
       enabled = true,
